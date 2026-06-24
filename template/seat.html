@@ -1,0 +1,335 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Select Seats</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(10px); 
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+
+        .bus {
+            text-align: center;
+            background-color: rgba(19, 20, 19, 0.346);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .seat {
+            width: 55px;
+            height: 30px;
+            background-color: whitesmoke;
+            outline: 0.3mm solid rgb(180, 180, 180);
+            cursor: pointer;
+            display: inline-block;
+            margin: 3px;
+            line-height: 30px;
+            color: black;
+        }
+
+        .seat:hover {
+            background-color: rgba(245, 245, 245, 0.265);
+        }
+
+        .lower {
+            border: 2px solid rgba(0, 0, 0, 0.42);
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.938);
+        }
+
+        .upper-deck {
+            border: 2px solid rgba(0, 0, 0, 0.42);
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.938);
+        }
+
+        .content {
+            font-size: x-large;
+            font-style: oblique;
+            display: inline-block;
+        }
+
+        .work {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .driver  {
+            mix-blend-mode: multiply;
+            width: 10px;
+        }
+
+        button {
+            align-self: center;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 3px;
+        }
+
+        button:hover {
+            background-color: #006bff
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 300px;
+            margin-right: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .heading{
+            font-size: 40px;
+            color:#080808;
+            margin-top: 70px;
+            align-content: center;
+            text-decoration-line: underline;
+            margin-left: 36.5%;
+        }
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+    <script>
+        $(document).ready(function () {
+            var seat_count = 0;
+            var price = 2000;
+            $(".seat").mousedown(function () {
+                if ($(this).css("background-color") === "rgba(26, 188, 26, 0.74)") {
+                    $(this).css("background-color", "");
+                    seat_count--;
+                    price = seat_count * 2000;
+                    $(".price").html('Total Price : ' + price);
+                    $(".seat_count").html(seat_count + 'Seats Selected');
+                } else {
+                    $(this).css("background-color", "rgba(26, 188, 26, 0.74)");
+                    seat_count++;
+                    price = seat_count * 2000;
+                    $(".price").html('Total Price : ' + price);
+                    $(".seat_count").html(seat_count + ' Seats Selected');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="navbar">
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'logo.png' %}" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/f">FLIGHTS</a></li>
+                <li><a href="/hotel_list">HOTELS</a></li>
+                <li><a href="/train">TRAINS</a></li>
+                <li><a href="/packages">HOLIDAYS</a></li>
+                <li><a href="/bus" class="active">BUSES</a></li>
+                <li><a href="/cancel">CANCEL</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="heading">SELECT YOUR SEAT</div>
+<div class="work">
+    <div class="bus">
+        LOWER DECK
+        <div class="lower">
+            <div class="seats">
+                <img src="{% static 'driver.png' %}" alt="driver" class="driver">
+                <div class="seat">seat A1</div>
+                <div class="seat">seat B1</div>
+                <div class="seat">seat C1</div>
+                <div class="seat">seat D1</div>
+                <div class="seat">seat E1</div>
+                <div class="seat">seat F1</div> <br><br>&nbsp;&nbsp;
+                <div class="seat">seat A2</div>
+                <div class="seat">seat B2</div>
+                <div class="seat">seat C2</div>
+                <div class="seat">seat D2</div>
+                <div class="seat">seat E2</div>
+                <div class="seat">seat F2</div> <br><br><br>&nbsp;&nbsp;
+                <div class="seat">seat A3</div>
+                <div class="seat">seat B3</div>
+                <div class="seat">seat C3</div>
+                <div class="seat">seat D3</div>
+                <div class="seat">seat E3</div>
+                <div class="seat">seat F3</div>
+            </div>
+        </div>
+        UPPER DECK
+        <div class="upper-deck">
+            &nbsp;&nbsp;&nbsp;<div class="seat">seat A4</div>
+            <div class="seat">seat B4</div>
+            <div class="seat">seat C4</div>
+            <div class="seat">seat D4</div>
+            <div class="seat">seat E4</div>
+            <div class="seat">seat F4</div> <br><br>&nbsp;&nbsp;
+            <div class="seat">seat A5</div>
+            <div class="seat">seat B5</div>
+            <div class="seat">seat C5</div>
+            <div class="seat">seat D5</div>
+            <div class="seat">seat E5</div>
+            <div class="seat">seat F5</div> <br><br><br>&nbsp;&nbsp;
+            <div class="seat">seat A6</div>
+            <div class="seat">seat B6</div>
+            <div class="seat">seat C6</div>
+            <div class="seat">seat D6</div>
+            <div class="seat">seat E6</div>
+            <div class="seat">seat F6</div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="seat_count">
+        </div>
+        <div class="price">
+        </div>
+        <div class="sbutton">
+            <button onclick="window.location.href = '/passenger';">Book Now</button>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Company</h3>
+            <div class="footer1">
+                <a href="/">Home</a><br>
+                <a href="/portfolio">Portfolio</a><br>
+                Contact: 91xxxxxx01
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+                <a href="/privacy">Privacy</a><br>
+                <a class="privacy-legal" href="/privacy">Privacy & Legal</a><br>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                <a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a><br>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <h2 align="center">Login Page</h2>
+        <h1>{{msg}}</h1>
+        <br><hr><br>
+        <form method="POST">
+            {% csrf_token %}
+            <table align="center">
+                <tr><td>Username<td><input type="text" name="uname" size="30"></tr>
+                <tr><td>Password<td><input type="password" name="password" size="30"></tr>
+                <tr><td colspan="2"><input type="submit" value="Login Here"></tr>
+            </table>
+        </form>
+        <br><hr><br>
+    </body>
+</html>

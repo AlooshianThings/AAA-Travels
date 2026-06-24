@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Ticket Cancellation</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.containers {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 170px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            margin-top: 50px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .btn {
+            display:inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .error{
+            color: red;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+            backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            margin-top: 200px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+  </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src= "{% static 'logo.png' %}"  alt="Logo">
+            </div>
+            <nav>
+              <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/f">FLIGHTS</a></li>
+                <li><a href="/hotel_list">HOTELS</a></li>
+                <li><a href="/train">TRAINS</a></li>
+                <li><a href="/packages">HOLIDAYS</a></li>
+                <li><a href="/bus">BUSES</a></li>
+                <li><a href="/cancel" class="active">CANCEL</a></li>
+            </ul>
+            </nav>
+        </div>
+    </div>
+  <div class="containers">
+    <h1>Cancel Bus Ticket</h1>
+    <form id="cancelForm" method="get">
+        {% csrf_token %}
+      <label for="ticketId">Enter Ticket ID:</label>
+      <input type="text" id="ticketId" name="ticketId" required>
+      <button type="submit">Cancel Ticket</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <table id="passengerTable">
+    <thead>
+      <tr>
+        <th>Booking ID</th>
+        <th>Passenger Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ booking }}</td>
+        <td>{{ name }}</td>
+        <td>{{ age }}</td>
+        <td>{{ email }}</td>
+        <td>{{ price }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="error">
+    {{ msg }}
+    {{ status }}
+  </div>
+  
+<div class="back-to-home" style="margin-top: 20px;">
+    <a href="/" class="btn">Back to Home</a>
+</div>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Company</h3>
+            <div class="footer1">
+                <a href="/">Home</a><br>
+                <a href="/portfolio">Portfolio</a><br>
+                Contact: 91xxxxxx01
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+                <a href="/privacy">Privacy</a><br>
+                <a class="privacy-legal" href="/privacy">Privacy & Legal</a><br>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                <a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a><br>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

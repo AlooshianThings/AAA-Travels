@@ -1,0 +1,240 @@
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel List</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}"> 
+    <style>
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+            backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+        /* Column and row styles */
+        .column {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Additional styling for content */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 55px;
+            text-decoration: underline;
+        }
+
+        .row {
+            margin-top: 20px;
+        }
+
+        .column {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .column h2 {
+            margin-top: 0;
+        }
+
+        .column p {
+            margin-bottom: 10px;
+        }
+
+        .column a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .column a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Center the content */
+        center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .column {
+                width: 100%;
+            }
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 20px;
+            margin-top: 300px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/f">Flights</a></li>
+                    <li><a href="/hotel_list" class="active">Hotels</a></li>
+                    <li><a href="/train">Trains</a></li>
+                    <li><a href="/packages">Holidays</a></li>
+                    <li><a href="/bus">Buses</a></li>
+                    <li><a href="/cancel">Cancel</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <br><br>
+{% block content %}
+<h1>Hotel List</h1>
+<ul>
+  <div class="row">
+  {% for hotel in hotels %}
+  <div class="column">
+   
+      <img src="{{ hotel.image1.url }}" alt="{{ hotel.name }}" width="300px" height="200px">
+      <h2>{{ hotel.name }}</h2>
+      <p>{{ hotel.location }}</p>
+      <p>Price per night: {{ hotel.price }} INR</p>
+      <a href="{% url 'hotel_detail' hotel.id %}">View Details</a>
+    
+  </div>
+  {% empty %}
+    <li>No hotels available.</li>
+  {% endfor %}
+</div>
+</ul>
+{% endblock %}
+<footer>
+  <div class="footer-content">
+      <div class="footer-section">
+          <h3>Company</h3>
+          <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/portfolio">Portfolio</a></li>
+              <li>Contact: 91xxxxxx01</li>
+          </ul>
+      </div>
+      <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+              <li><a href="/privacy">Privacy</a></li>
+              <li><a class="privacy-legal" href="/privacy">Privacy & Legal</a></li>
+          </ul>
+      </div>
+      <div class="footer-section">
+          <h3>Follow Us</h3>
+          <ul>
+              <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+              <li><a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a></li>
+              <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+      </div>
+  </footer>
+</body>

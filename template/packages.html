@@ -1,0 +1,219 @@
+{% load static %}
+
+<head>
+    <style>
+         .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+            backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+            opacity: 100%;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+        /* Column and row styles */
+        .column {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Additional styling for the packages */
+        .package {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .package img {
+            width: 100%;
+            height: 600;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .package h2 {
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+
+        .package p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .package form {
+            margin-top: 10px;
+        }
+
+        .package button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .package button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 20px;
+            margin-top: 300px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }             
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+</head>
+<body>
+<div class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/f">Flights</a></li>
+                    <li><a href="/hotel_list">Hotels</a></li>
+                    <li><a href="/train">Trains</a></li>
+                    <li><a href="/packages" class="active">Holidays</a></li>
+                    <li><a href="/bus">Bus</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    {% block content %}
+    <h1 style="margin-top: 125px;">Destination Packages</h1>
+    {% for package in packages %}
+    <div class="column">
+        <div class="package">
+            <img src="{{ package.image.url }}" alt="{{ package.name }}">
+            <h2>{{ package.name }}</h2>
+            <p>{{ package.price }} INR</p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="package" value="{{ package.id }}">
+                <button type="submit">Select</button>
+            </form>
+        </div>
+    </div>
+    {% empty %}
+    <h5>No destinations available.</h5>
+    {% endfor %}
+    {% endblock %}
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li>Contact: 91xxxxxx01</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a class="privacy-legal" href="/privacy">Privacy & Legal</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                    <li><a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+            </div>
+        </footer>
+</body>
+</html>
+
+    

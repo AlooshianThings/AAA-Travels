@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+            backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+        .containers {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px; 
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            text-decoration: underline;
+            padding: 2%;
+        }
+        .box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .box .Holidays,
+        .box .Hotels,
+        .box .trains,
+        .box .flights,
+        .box .buses {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+        .box .Holidays:hover,
+        .box .Hotels:hover,
+        .box .trains:hover,
+        .box .flights:hover,
+        .box .buses:hover {
+            transform: scale(1.05);
+        }
+        .box img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+        p#title {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #333;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px ;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/f">FLIGHTS</a></li>
+                    <li><a href="/hotel_list">HOTELS</a></li>
+                    <li><a href="/train">TRAINS</a></li>
+                    <li><a href="/packages">HOLIDAYS</a></li>
+                    <li><a href="/bus">BUSES</a></li>
+                    <li><a href="/cancel" class="active">CANCEL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="containers">
+        <h1>CANCEL YOUR BOOKINGS</h1>
+        <div class="box">
+            <div class="Holidays">
+                <img src="{% static 'holidays.png' %}" alt="Holiday Logo"/>
+                <p id="title">HOLIDAYS</p>
+                <a href="/cancel_holiday">
+                <input type="submit" value="cancel your packages">
+                </a>
+            </div>
+            <div class="Hotels">
+                <img src="{% static 'hotels.png' %}" alt="Hotels Logo"/>
+                <p id="title">HOTELS</p>
+                <a href="/cancel_hotel">
+                <input type="submit" value="cancel your hotel bookings">
+                </a>
+            </div>
+            <div class="trains">
+                <img src="{% static 'trains.png' %}" alt="Trains Logo"/>
+                <p id="title">TRAINS</p>
+                <a href="/cancel_train">
+                <input type="submit" value="cancel your train tickets">
+                </a>
+            </div>
+            <div class="flights">
+                <img src="{% static 'flights.png' %}" alt="flights Logo"/>
+                <p id="title">FLIGHTS</p>
+                <a href="/cancel_flight">
+                <input type="submit" value="cancel your flight tickets">
+                </a>
+            </div>
+            <div class="buses">
+                <img src="{% static 'buses.png' %}" alt="buses Image"/>
+                <p id="title">BUSES</p>
+                <a href="/cancel_bus">
+                <input type="submit" value="cancel your bus tickets">
+                </a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Company</h3>
+                <div class="footer1">
+                    <a href="/">Home</a><br>
+                    <a href="/portfolio">Portfolio</a><br>
+                    Contact: 91xxxxxx01
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                    <a href="/privacy">Privacy</a><br>
+                    <a class="privacy-legal" href="/privacy">Privacy & Legal</a><br>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                    <a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a><br>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

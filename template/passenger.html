@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking - Passenger Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .details {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 60px; 
+        }
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 80px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+            backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.png' %}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src= "{% static 'logo.png' %}"  alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/f">FLIGHTS</a></li>
+                    <li><a href="/hotel_list">HOTELS</a></li>
+                    <li><a href="/train">TRAINS</a></li>
+                    <li><a href="/packages">HOLIDAYS</a></li>
+                    <li><a href="/bus" class="active">BUSES</a></li>
+                    <li><a href="/cancel">CANCEL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="details">
+        <h1>Passenger Details</h1>
+
+        <form method="POST" id="paymentForm">
+            {% csrf_token %}
+            <input type="hidden" id="booking_id" name="booking_id">{{booking_id}}
+            <label for="passenger1Name">Passenger 1 Name</label>
+            <input type="text" id="passenger1Name" name="passenger1Name" required>
+
+            <label for="passenger1Age">Passenger 1 Age</label>
+            <input type="number" id="passenger1Age" name="passenger1Age" min="1" required>
+
+            <label for="passenger1Email">Passenger 1 Email</label>
+            <input type="email" id="passenger1Email" name="passenger1Email" required>
+
+            <label for="passenger2Name">Passenger 2 Name</label>
+            <input type="text" id="passenger2Name" name="passenger2Name" value="null" placeholder="Optional">
+
+            <label for="passenger2Age">Passenger 2 Age</label>
+            <input type="number" id="passenger2Age" name="passenger2Age" value="0"  placeholder="Not Required">
+
+            <label for="passenger2Email">Passenger 2 Email</label>
+            <input type="email" id="passenger2Email" name="passenger2Email" value="null@null" placeholder="Optional">
+
+            <input type="submit" value="Proceed to Payment">
+        </form>
+    </div>  
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Company</h3>
+                <div class="footer1">
+                    <a href="/">Home</a><br>
+                    <a href="/portfolio">Portfolio</a><br>
+                    Contact: 91xxxxxx01
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                    <a href="/privacy">Privacy</a><br>
+                    <a class="privacy-legal" href="/privacy">Privacy & Legal</a><br>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                    <a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a><br>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Booking - Payment Confirmation</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .containers{
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .confirmation {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;}
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    
+    <div class="containers">
+        <h1>Payment Confirmation</h1>
+
+        <div class="confirmation">
+            <h2>Thank You!</h2>
+            <p>Your payment has been successfully processed.</p>
+        </div>
+
+        <div class="details">
+            <h2>Booking Confirmation</h2>
+            <div style="overflow-x: auto;">
+                <table id="passengerTable">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Check-in Date</th>
+                            <th>Check-out Date</th>
+                            <th>Number of Guests</th>
+                            <th>Price per Night</th>
+                            <th>Booking ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ hotel_name }}</td>
+                            <td>{{ booking.check_in_date }}</td>
+                            <td>{{ booking.check_out_date }}</td>
+                            <td>{{ booking.no_of_guests }}</td>
+                            <td>Rs.{{ booking.room.price }}</td>
+                            <td>{{ booking_id }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="total">
+                <p><strong>Total Amount:</strong> <span id="totalAmount">{{ total_price }}</span>&nbsp;INR</p>
+            </div>
+        </div>
+
+        <div class="back-to-home">
+            <a href="/" class="btn">Back to Home</a>
+        </div>
+    </div>   
+</body>
+</html>

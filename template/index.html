@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Slick Slider CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Courier", monospace;
+        }
+
+        header {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 80px;
+        }
+
+        header h4 {
+            position: absolute;
+            left: 2.5%;
+            bottom: 1rem;
+            font-size: 1.6rem;
+        }
+        .intro {
+            position: fixed;
+            z-index: 1;
+            left: 0%;
+            top: 0%;
+            width: 100%;
+            height: 100vh;
+            /* Set background image and adjust position */
+            background-image: url('{% static 'front.jpg' %}');
+            background-size: cover;
+            /* Shift the image to the left */
+            background-position: left center;
+            transition-duration: 1.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo-header {
+            color: black;
+            text-shadow: 3px 3;
+            font-weight: bold;
+            font-size:  5em;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-block;
+            bottom: -20px;
+            opacity: 0;
+        }
+
+        .logo.active {
+            bottom: 0;
+            opacity: 1;
+            transition: ease-in-out 0.5s;
+        }
+
+        .logo.fade {
+            bottom: 0;
+            opacity: 0;
+            transition: ease-in-out 0.5s;
+        }
+
+        .flight-container {
+            position: absolute;
+            bottom: -100vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: flightSlideUp 2s ease-out forwards;
+        }
+
+        .flight {
+            width: 125px;
+            mix-blend-mode: multiply;
+        }
+
+        @keyframes flightSlideUp {
+            0% {
+                bottom: -100vh;
+            }
+            100% {
+                bottom: 0;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f1f1;
+        }
+
+        .topnav {
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5px;
+        }
+
+        .nav-list {
+            /* Use a flexbox layout for the navigation items */
+            display: flex;
+            list-style: none;
+            /* Remove the default list style */
+            padding: 0;
+            /* Remove default padding */
+        }
+
+        .nav-item {
+            margin: 0 10px;
+        }
+
+        .nav-item a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-item a:hover {
+            background-color: #333;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input[type="text"] {
+            padding: 5px;
+        }
+
+        .search-box input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .background-slider {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Individual Slides */
+    .slide {
+      position: relative;
+      height: 90vh;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Slide Content */
+    .slide-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      max-width: 80%;
+    }
+    .slide-content{
+        font-size: 100px;
+        color: rgb(255, 254, 254);
+    }
+    footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.search-box {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .search-box:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+</head>
+<body>
+<div class="intro">
+    <div class="flight-container">
+        <img src="{% static 'flight1.png' %}" alt="Flight" class="flight">
+    </div>
+    <h1 class="logo-header">
+        <span class="logo">TRIP &nbsp;</span><span class="logo">MAAR&nbsp;</span> <span class="logo">LO.&nbsp;</span><br>
+    </h1>
+</div>
+
+<div class="topnav">
+    <nav class="nav-item"><img src="{% static 'logo.png' %}", style="width: 50px;"></nav>
+    <nav class="nav-item"><a href="/packages">TRAVELS</a></nav>
+    <nav class="nav-item"><a href="/hotel_list">HOTELS</a></nav>
+    <nav class="nav-item"><a href="/train">TRAINS</a></nav>
+    <nav class="nav-item"><a href="/f">FLIGHT</a></nav>
+    <nav class="nav-item"><a href="/bus">BUS</a></nav>
+    <nav class="nav-item"><a href="/cancel">CANCEL</a></nav>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <div class="background-slider">
+        <a href="#" class="slide" style="background-image: url('{% static 'image1.jpg' %}');">
+          <div class="slide-content">
+            <h2>LUCKNOW</h2>
+          </div>
+        </a>
+        <a href="#" class="slide" style="background-image: url('{% static 'image2.jpg' %}');">
+          <div class="slide-content">
+            <h2>ODISHA</h2>
+          </div>
+        </a>
+        <a href="#" class="slide" style="background-image: url('{% static 'image3.jpg' %}');">
+          <div class="slide-content">
+            <h2>PUNE</h2>
+          </div>
+        </a>
+      </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let intro = document.querySelector('.intro');
+        let flightContainer = document.querySelector('.flight-container');
+        let logoSpan = document.querySelectorAll('.logo');
+
+        setTimeout(() => {
+            logoSpan.forEach((span, idx) => {
+                setTimeout(() => {
+                    span.classList.add('active');
+                }, (idx + 1) * 400);
+            });
+
+            setTimeout(() => {
+                logoSpan.forEach((span, idx) => {
+                    setTimeout(() => {
+                        span.classList.remove('active');
+                        span.classList.add('fade');
+                    }, (idx + 1) * 50);
+                });
+            }, 2000);
+
+            setTimeout(() => {
+                intro.style.top = '-100vh';
+                flightContainer.style.bottom = '0';
+            }, 2300);   
+        });
+    });
+    $(document).ready(function(){
+      $('.background-slider').slick({
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+        dots: false,
+        fade: true,
+        speed: 1000,
+        pauseOnHover: false,
+        pauseOnFocus: false
+      });
+    });
+</script>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Company</h3>
+            <div class="footer1">
+                <a href="/">Home</a><br>
+                <a href="/portfolio">Portfolio</a><br>
+                Contact: 91xxxxxx01
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+                <a href="/privacy">Privacy</a><br>
+                <a class="privacy-legal" href="/privacy">Privacy & Legal</a><br>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                <a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a><br>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

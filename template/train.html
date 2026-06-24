@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Information</title>
+    <style>
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
+            backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+        }
+
+        .navbar nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-right: 20px;
+        }
+
+        .navbar nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar nav ul li a.active {
+            background-color: #007bff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .container {
+                padding: 0 10px;
+            }
+
+            .navbar .logo img {
+                height: 30px;
+            }
+
+            .navbar nav ul li a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #006bff;
+        }
+
+        h1 {
+            color: rgb(0, 0, 0);
+        }
+
+        .train-result {
+            padding: 10px;
+            border: 1px solid #cccccc00;
+            background-color: rgba(54, 54, 54, 0.329);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+            color: black;
+        }
+
+        .train-result:hover {
+            color: white;
+            background-color: #006bff;
+        }
+
+        .default-info {
+            padding: 10px;
+            border: 1px solid #cccccc00;
+            background-color: rgba(54, 54, 54, 0.329);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+            color: black;
+        }
+
+        .default-info:hover {
+            color: white;
+            background-color: #006bff;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+    </style>
+    <title>AAA TRAVELERS</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.ico' %}">
+</head>
+<body>
+<div class="navbar">
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'logo.png' %}" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/f">FLIGHTS</a></li>
+                <li><a href="/hotel_list">HOTELS</a></li>
+                <li><a href="/train" class="active">TRAINS</a></li>
+                <li><a href="/packages">HOLIDAYS</a></li>
+                <li><a href="/bus" >BUSES</a></li>
+                <li><a href="/cancel">CANCEL</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div>
+    <label for="searchInput">Enter destination or train no.</label>
+    <input type="text" id="searchInput" placeholder="enter a destination or train no.">
+    <button id="searchBtn">Search</button>
+</div>
+<br>
+<br>
+<a href="https://www.irctc.co.in/nget/train-search">
+    <div class="default-info">
+        <strong>Train Number:</strong>12432 <br>
+        <strong>Name:</strong> Delhi Hazrat Nizamuddin - Thiruvananthapuram Central Rajdhani Express <br>
+        <strong>From:</strong>NZM <br>
+        <strong>To:</strong>TVC <br>
+        <strong>Depart Time:</strong>10:55 <br>
+        <strong>Arrive Time:</strong>04:55 +2 nights <br>
+        <strong>Days of Week:</strong>Sun Tue Wed <br>
+        <strong>Price:</strong>2383
+    </div>
+    <div class="default-info">
+        <strong>Train Number:</strong>14313 <br>
+        <strong>Name:</strong> Mumbai LTT - Bareilly Weekly Express <br>
+        <strong>From:</strong>LTT<br>
+        <strong>To:</strong>BE<br>
+        <strong>Depart Time:</strong> 08:05<br>
+        <strong>Arrive Time:</strong>15:40 +1 night<br>
+        <strong>Days of Week:</strong>Mon<br>
+        <strong>Price:</strong>4383
+    </div>
+    <div class="default-info">
+        <strong>Train Number:</strong>12124<br>
+        <strong>Name:</strong>Deccan Queen<br>
+        <strong>From:</strong>PUNE<br>
+        <strong>To:</strong>CSTM<br>
+        <strong>Depart Time:</strong>07:15<br>
+        <strong>Arrive Time:</strong>10:25<br>
+        <strong>Days of Week:</strong>Fri Mon Sat Sun Thu Tue Wed<br>
+        <strong>Price:</strong>2838
+    </div>
+    <div class="default-info">
+        <strong>Train Number:</strong>12358<br>
+        <strong>Name:</strong> Durgiana SF Express<br>
+        <strong>From:</strong>ASR<br>
+        <strong>To:</strong>KOAA<br>
+        <strong>Depart Time:</strong>05:55<br>
+        <strong>Arrive Time:</strong>11:35 +1 night<br>
+        <strong>Days of Week:</strong>Mon Thu<br>
+        <strong>Price:</strong>3838
+    </div>
+    <div class="default-info">
+        <strong>Train Number:</strong>13417<br>
+        <strong>Name:</strong>Digha - Malda Town Express<br>
+        <strong>From:</strong>DGHA<br>
+        <strong>To:</strong>MLDT<br>
+        <strong>Depart Time:</strong>23:55<br>
+        <strong>Arrive Time:</strong>14:25 +1 night<br>
+        <strong>Days of Week:</strong>Thu<br>
+        <strong>Price:</strong>4536
+    </div>
+</a>
+<a href="https://www.irctc.co.in/nget/train-search">
+<div id="train-info"></div>
+</a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchBtn').click(function() {
+            let searchQuery = $('#searchInput').val().trim();
+
+            if (searchQuery === '') {
+                alert('Please enter a destination or train no.');
+                return;
+            }
+
+            const settings = {
+                async: true,
+                crossDomain: true,
+                url: 'https://trains.p.rapidapi.com/',
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': '755d0341e9msh059a3a5625999dbp1ba632jsn133480fae246',
+                    'X-RapidAPI-Host': 'trains.p.rapidapi.com'
+                },
+                processData: false,
+                data: JSON.stringify({
+                    "search": searchQuery
+                })
+            };
+
+            $.ajax(settings).done(function(response) {
+                let trainHtml = '<h1>Train Information for ' + searchQuery + '</h1>';
+                response.forEach(function(train) {
+                    trainHtml += '<div class="train-result">';
+                    trainHtml += '<strong>Train Number:</strong> ' + train.train_num + '<br>';
+                    trainHtml += '<strong>Name:</strong> ' + train.name + '<br>';
+                    trainHtml += '<strong>From:</strong> ' + train.train_from + '<br>';
+                    trainHtml += '<strong>To:</strong> ' + train.train_to + '<br>';
+                    trainHtml += '<strong>Depart Time:</strong> ' + train.data.departTime + '<br>';
+                    trainHtml += '<strong>Arrive Time:</strong> ' + train.data.arriveTime + '<br>';
+                    trainHtml += '<strong>Days of Week:</strong> ' + getDaysOfWeek(train.data.days) + '<br>';
+                    trainHtml += '<strong>Price:</strong> ' + price() + '<br>';
+                    trainHtml += '</div><br>';
+                });
+                $('#train-info').html(trainHtml);
+                $('.default-info').hide();
+            });
+
+        });
+
+        // Function to get days of the week with '1' value
+        function getDaysOfWeek(daysObj) {
+            let daysString = '';
+            for (const day in daysObj) {
+                if (daysObj[day] === 1) {
+                    daysString += day + ' ';
+                }
+            }
+            return daysString.trim();
+        }
+
+        function price(min, max) {
+            return Math.ceil(Math.random() * (5000 - 2000 + 1));
+        }
+    });
+</script>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Company</h3>
+            <div class="footer1">
+                <a href="/">Home</a><br>
+                <a href="/portfolio">Portfolio</a><br>
+                Contact: 91xxxxxx01
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+                <a href="/privacy">Privacy</a><br>
+                <a class="privacy-legal" href="/privacy">Privacy & Legal</a><br>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                <a href="https://twitter.com/home"><i class="fab fa-twitter"></i> Twitter</a><br>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Travel Agency. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
